@@ -4,325 +4,730 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Templo Aurora Negra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --black: #050303;
+            --black-soft: #0e0808;
+            --wine: #800020;
+            --wine-dark: #3b080f;
+            --red: #c41e3a;
+            --red-soft: #e06476;
+            --text: #d8d0d0;
+            --muted: #9d8d8d;
+            --panel: rgba(7, 4, 4, 0.86);
+            --panel-strong: rgba(18, 8, 9, 0.94);
+            --border: rgba(128, 0, 32, 0.72);
+            --shadow: rgba(128, 0, 32, 0.34);
+            --sidebar-width: 292px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Cinzel', serif; /* Fonte gótica elegante para leitura */
-            background: linear-gradient(135deg, #000000, #2d1b1b, #000000); /* Gradiente dark com vinho escuro */
-            color: #c41e3a; /* Vermelho vinho mais claro para texto principal */
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            text-align: center;
-            line-height: 1.8; /* Melhor espaçamento para leitura */
+            font-family: 'Cinzel', serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 20% 0%, rgba(128, 0, 32, 0.22), transparent 30%),
+                radial-gradient(circle at 85% 18%, rgba(196, 30, 58, 0.14), transparent 24%),
+                linear-gradient(135deg, #000000, #1b090b 38%, #050303 100%);
+            line-height: 1.75;
             overflow-x: hidden;
         }
-        header {
-            background: radial-gradient(circle, #000000, #4a0e0e, #000000); /* Vinho escuro no gradiente */
-            padding: 60px 20px;
-            border-bottom: 3px solid #800020; /* Bordas em vinho burgundy */
-            box-shadow: 0 0 20px rgba(128, 0, 32, 0.5); /* Sombra vinho */
-            position: relative;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,0 100,50 50,100 0,50" fill="rgba(128,0,32,0.1)"/></svg>') repeat;
-            opacity: 0.1;
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px);
+            background-size: 48px 48px;
             pointer-events: none;
+            opacity: 0.35;
         }
-        h1 {
-            font-family: 'UnifrakturMaguntia', cursive; /* Fonte blackletter para título */
-            font-size: 4em;
-            text-shadow: 0 0 15px #800020, 0 0 30px #800020, 0 0 45px #800020; /* Brilho vinho */
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { text-shadow: 0 0 15px #800020; }
-            50% { text-shadow: 0 0 30px #800020, 0 0 45px #800020; }
-        }
-        nav {
-            margin: 30px;
-            position: relative;
-        }
-        nav a {
-            color: #c41e3a; /* Vermelho vinho */
+
+        a {
+            color: var(--red-soft);
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.3em;
-            font-weight: 700;
-            transition: all 0.5s ease;
-            text-shadow: 0 0 5px #800020;
-            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
         }
-        nav a:hover {
+
+        a:hover,
+        a:focus-visible {
             color: #ffffff;
-            text-shadow: 0 0 10px #800020, 0 0 20px #800020;
-            border-bottom: 2px solid #800020;
-            transform: scale(1.1);
         }
-        /* Menu dropdown para postagens - mais elaborado */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: linear-gradient(135deg, #000000, #4a0e0e);
-            border: 2px solid #800020;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(128, 0, 32, 0.8);
-            min-width: 250px;
-            z-index: 1;
-            text-align: left;
-            padding: 10px 0;
-        }
-        .dropdown-content a {
-            color: #c41e3a;
-            padding: 15px 20px;
-            text-decoration: none;
-            display: block;
-            font-size: 1.1em;
-            transition: background 0.3s, color 0.3s;
-        }
-        .dropdown-content a:hover {
-            background: rgba(128, 0, 32, 0.2);
-            color: #ffffff;
-            text-shadow: 0 0 10px #800020;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        section {
-            padding: 60px 30px;
-            max-width: 900px;
-            margin: auto;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #800020;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(128, 0, 32, 0.3);
-            margin-bottom: 20px;
-            position: relative;
-        }
-        section::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, transparent, rgba(128,0,32,0.1), transparent);
-            border-radius: 20px;
-            z-index: -1;
-        }
-        .dark-text {
-            color: #cccccc;
-            font-size: 1.1em;
-            text-align: justify;
-            column-count: 2; /* Colunas para melhor leitura em telas grandes */
-            column-gap: 20px;
-        }
-        @media (max-width: 768px) {
-            .dark-text {
-                column-count: 1;
-            }
-        }
-        .ritual {
-            background: linear-gradient(135deg, rgba(128, 0, 32, 0.1), rgba(0, 0, 0, 0.9));
-            padding: 30px;
-            border: 3px solid #800020;
-            border-radius: 10px;
-            margin: 30px 0;
-            box-shadow: inset 0 0 20px rgba(128, 0, 32, 0.5);
-        }
-        .post-list {
-            list-style: none;
-            padding: 0;
-        }
-        .post-list li {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(128, 0, 32, 0.05);
-            border-left: 5px solid #800020;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .post-list li:hover {
-            transform: translateX(10px);
-            box-shadow: 0 0 15px rgba(128, 0, 32, 0.5);
-        }
-        .post-list a {
-            color: #c41e3a;
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .post-list a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px #800020;
-        }
-        footer {
-            background: linear-gradient(to top, #000000, #4a0e0e);
-            padding: 30px;
-            border-top: 3px solid #800020;
-            color: #666;
-            font-style: italic;
-            box-shadow: 0 -5px 20px rgba(128, 0, 32, 0.5);
-        }
+
         img {
             max-width: 100%;
             height: auto;
-            border: 3px solid #800020;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(128, 0, 32, 0.5);
-            transition: transform 0.3s;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 0 24px var(--shadow);
+            background: var(--black-soft);
         }
-        img:hover {
-            transform: scale(1.05);
+
+        .site-header {
+            position: relative;
+            min-height: 520px;
+            display: grid;
+            place-items: center;
+            padding: 56px 24px 72px;
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
         }
-        /* Citações para atratividade */
-        blockquote {
-            font-style: italic;
-            border-left: 5px solid #800020;
-            padding-left: 20px;
-            margin: 20px 0;
+
+        .site-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.8)),
+                url("https://i.ibb.co/ZzkKCNTX/1000001097.png") center/320px no-repeat;
+            opacity: 0.52;
+        }
+
+        .site-header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 0 34%, rgba(0, 0, 0, 0.8) 78%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 940px;
+        }
+
+        .sigil {
+            width: 168px;
+            aspect-ratio: 1;
+            object-fit: contain;
+            margin-bottom: 18px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.58);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--red);
+            line-height: 1.12;
+            margin: 0;
+        }
+
+        h1 {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: clamp(3.1rem, 8vw, 6.4rem);
+            font-weight: 400;
+            text-shadow: 0 0 18px rgba(128, 0, 32, 0.96), 0 0 36px rgba(128, 0, 32, 0.72);
+        }
+
+        h2 {
+            font-size: clamp(1.65rem, 3vw, 2.45rem);
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-kicker {
+            max-width: 760px;
+            margin: 18px auto 0;
+            color: #f1e8e8;
+            font-size: 1.12rem;
+            text-shadow: 0 0 12px rgba(128, 0, 32, 0.95);
+        }
+
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 14px 18px;
+            background: rgba(5, 3, 3, 0.94);
+            border-bottom: 1px solid rgba(128, 0, 32, 0.72);
+            backdrop-filter: blur(14px);
+        }
+
+        .top-nav a {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 14px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            color: var(--red-soft);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .top-nav a:hover,
+        .top-nav a:focus-visible {
             color: #ffffff;
-            text-shadow: 0 0 5px #800020;
+            border-color: var(--border);
+            background: rgba(128, 0, 32, 0.16);
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+            gap: 28px;
+            width: min(1440px, 100%);
+            margin: 0 auto;
+            padding: 32px 24px 56px;
+            align-items: start;
+        }
+
+        .library-sidebar {
+            position: sticky;
+            top: 84px;
+            max-height: calc(100vh - 108px);
+            overflow: auto;
+            padding: 22px;
+            background: linear-gradient(180deg, rgba(20, 8, 10, 0.96), rgba(0, 0, 0, 0.92));
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 0 28px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(128, 0, 32, 0.12);
+        }
+
+        .library-sidebar h2 {
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-weight: 400;
+        }
+
+        .sidebar-note {
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .library-list {
+            display: grid;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .library-list a {
+            display: block;
+            padding: 10px 12px;
+            border-left: 3px solid rgba(128, 0, 32, 0.72);
+            border-radius: 4px;
+            color: var(--text);
+            background: rgba(128, 0, 32, 0.08);
+            font-size: 0.88rem;
+            line-height: 1.35;
+        }
+
+        .library-list a:hover,
+        .library-list a:focus-visible {
+            color: #ffffff;
+            border-left-color: var(--red-soft);
+            background: rgba(128, 0, 32, 0.22);
+        }
+
+        .content {
+            display: grid;
+            gap: 26px;
+        }
+
+        .section-panel {
+            padding: clamp(26px, 4vw, 44px);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.28), 0 0 22px rgba(128, 0, 32, 0.14);
+            scroll-margin-top: 90px;
+        }
+
+        .section-panel > p,
+        .section-panel li {
+            color: var(--text);
+        }
+
+        .lead {
+            margin-top: 0;
+            color: #e9dddd;
+            font-size: 1.03rem;
+        }
+
+        .text-columns {
+            column-count: 2;
+            column-gap: 34px;
+            text-align: justify;
+        }
+
+        .feature-image {
+            display: block;
+            width: min(520px, 100%);
+            margin: 26px auto 0;
+        }
+
+        blockquote {
+            margin: 26px 0 0;
+            padding: 14px 18px;
+            color: #ffffff;
+            background: rgba(128, 0, 32, 0.1);
+            border-left: 4px solid var(--wine);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .card {
+            min-height: 178px;
+            padding: 20px;
+            background: var(--panel-strong);
+            border: 1px solid rgba(128, 0, 32, 0.6);
+            border-radius: 8px;
+            box-shadow: inset 0 0 18px rgba(128, 0, 32, 0.08);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            margin-top: 16px;
+            padding: 4px 10px;
+            border: 1px solid rgba(224, 100, 118, 0.42);
+            border-radius: 999px;
+            color: var(--red-soft);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .post-list {
+            display: grid;
+            gap: 14px;
+            margin: 24px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .post-card {
+            padding: 18px;
+            background: rgba(128, 0, 32, 0.08);
+            border: 1px solid rgba(128, 0, 32, 0.42);
+            border-left: 4px solid var(--wine);
+            border-radius: 8px;
+        }
+
+        .post-card a {
+            color: var(--red-soft);
+            font-weight: 700;
+        }
+
+        .post-card p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .consult-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .button-link {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: #ffffff;
+            background: rgba(128, 0, 32, 0.28);
+            font-weight: 700;
+        }
+
+        .button-link:hover,
+        .button-link:focus-visible {
+            background: rgba(196, 30, 58, 0.34);
+        }
+
+        .tool-placeholder {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 22px;
+            border: 1px dashed rgba(224, 100, 118, 0.54);
+            border-radius: 8px;
+            background: rgba(128, 0, 32, 0.07);
+        }
+
+        .site-footer {
+            position: relative;
+            z-index: 1;
+            padding: 28px 20px;
+            color: var(--muted);
+            text-align: center;
+            background: linear-gradient(to top, #000000, #26070d);
+            border-top: 2px solid var(--border);
+        }
+
+        .site-footer p {
+            margin: 0;
+        }
+
+        .fade-section {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 980px) {
+            .page-shell {
+                grid-template-columns: 1fr;
+                padding-inline: 16px;
+            }
+
+            .library-sidebar {
+                position: relative;
+                top: auto;
+                max-height: none;
+            }
+
+            .library-list {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .site-header {
+                min-height: 460px;
+                padding: 38px 18px 54px;
+            }
+
+            .sigil {
+                width: 132px;
+            }
+
+            .top-nav {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .top-nav a {
+                flex: 0 0 auto;
+                font-size: 0.86rem;
+            }
+
+            .text-columns {
+                column-count: 1;
+                text-align: left;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Templo Aurora Negra</h1>
-        <p class="dark-text">
-            <center>O conhecimento é o sangue que alimenta a alma!🩸<center>
-        </p>
-        <img src="https://i.ibb.co/ZzkKCNTX/1000001097.png" alt="Símbolo Luciférico" style="width: 250px; height: auto;">
+    <header class="site-header" id="inicio">
+        <div class="hero-content">
+            <img class="sigil" src="https://i.ibb.co/ZzkKCNTX/1000001097.png" alt="Símbolo luciférico do Templo Aurora Negra">
+            <h1>Templo Aurora Negra</h1>
+            <p class="hero-kicker">O conhecimento é o sangue que alimenta a alma.</p>
+        </div>
     </header>
-    
-    <nav>
-        <a href="#sobre">Sobre a Ordem</a>
-        <a href="#leituras">Leituras</a>
-        <a href="#rituais">Projetos</a>
+
+    <nav class="top-nav" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#biblioteca">Biblioteca</a>
+        <a href="#consultas">Consultas</a>
+        <a href="#livros">Livros</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#ferramentas">Ferramentas</a>
         <a href="#comunidade">Comunidade</a>
-        <div class="dropdown">
-            <a href="#postagens">Postagens ▼</a>
-            <div class="dropdown-content">
-                <a href="#post1">A Etimologia de Lúcifer: Caminhos para a Iluminação</a>
-                <a href="#post2">Caminhos vampiricos</a>
-                <a href="#post3">Jurema: Sabedoria dos Ancestrais e Visões Espirituais</a>
-                <a href="#post4">Biblioteca Negra: Magia desvendada</a>
-                <a href="#post5">Luciferianismo e Vampirismo: Uma Fusão Negra</a>
-                <a href="#post6">Preparando Jurema: Guia para Iniciantes</a>
-                <a href="#post7">Invocações Noturnas: Chamando as Sombras</a>
-                <a href="#post8">Histórias de Ordem: Experiências dos Adeptos</a>
-            </div>
-        </div>
     </nav>
-    
-    <section id="sobre">
-        <h2>Sobre a Ordem</h2>
-        <p class="dark-text"></p>Somos o Templo da Aurora Negra, uma ordem não iniciática dedicada ao estudo, preservação e difusão dos mistérios esotéricos e ocultistas. Nosso propósito é reunir, organizar e compartilhar saberes que transitam entre o luciferianismo, o vampirismo, a bruxaria, necromancia, entre outras tradições ocultas.
-<br>
-<br>
-        Buscamos ser um ponto de referência para aqueles que desejam compreender, aprofundar e vivenciar as ciências ocultas e a magia. Nosso trabalho não se limita apenas ao ensino, mas também à construção de um espaço vivo de diálogo, pesquisa e prática.
-<br>
-<br>
-Em um futuro próximo, expandiremos este projeto com a fundação de um templo físico, consagrado a Lúcifer, como farol e centro de convergência para todos que caminham por sendas alternativas de espiritualidade
-        <blockquote>"Nenhuma árvore pode crescer até o céu a menos que suas raízes alcancem o inferno. - Carl Jung"</blockquote>
-        <img src="https://i.ibb.co/DPQ94StC/Whats-App-Image-2025-10-24-at-13-38-10.jpg" alt="Tema Vampírico">
-    </section>
-    
-    <section id="leituras">
-        <h2>Leituras Esotéricas</h2>
-        <p class="dark-text">Mergulhe em textos inspirados. Recomendamos:</p>
-        <ul class="dark-text">
-            <li><strong>O Manifesto Luciférico:</strong> Rebelião e iluminação pessoal.</li>
-            <li><strong>Vampirismo Moderno:</strong> Energia vital e imortalidade simbólica.</li>
-            <li><strong>Rituais com Jurema:</strong> Guias para preparo e uso em cerimônias espirituais.</li>
-            <li><strong>Textos hereticos:</strong> Livros e textos da ordem</li>
-        </ul>
-        <p class="dark-text">Baixe PDFs  ou leia online (Em breve).</p>
-        <blockquote>"O conhecimento é o sangue que alimenta a alma."</blockquote>
-    </section>
-    
-    <section id="rituais">
-        <h2>Rituais</h2>
-        <div class="ritual">
-            <h3>Rituais de Jurema</h3>
-            <p class="dark-text">(Em Breve)</p>
-            <img src="https://i.ibb.co/0VQfLFpq/Whats-App-Image-2025-10-24-at-13-38-09.jpg" alt="Ritual com Jurema">
-        </div>
-        <div class="ritual">
-            <h3>Vampirismo</h3>
-            <p class="dark-text">(Em Breve)</p>
-        </div>
-        <p class="dark-text">Atenção: Estes são rituais devem ser levados a serio. Pratique com responsabilidade e respeito às leis.</p>
-        <blockquote>"O ritual é a ponte entre o mortal e o eterno."</blockquote>
-    </section>
-    
-    <section id="comunidade">
-        <h2>Comunidade</h2>
-        <p class="dark-text">Junte-se aos Membros. Compartilhe experiências em fóruns e redes sociais 
-        <br>
-        <a href="https://chat.whatsapp.com/ETsitk4HFUYKXC299AtYko?mode=wwt">Whatsapp</a>
-        <br>
-        <a href="https://www.instagram.com/temploauroranegra?igsh=c3Jqa2V6MXdvenRj">Instagram</a> 
-        <blockquote>"Meu nome é Legião, porque somos muitos. - O calice vampirico"</blockquote>
-    </section>
-    
-    <section id="postagens">
-        <h2>Postagens</h2>
-        <p class="dark-text">Explore nossas postagens recentes, mergulhando em temas esotéricos. Clique nos títulos para ler.</p>
-        <ul class="post-list">
-            <li id="post1"><a href="#post1"><strong>A Etimologia de Lícifer: Caminhos para a Iluminação</strong></a><br><span class="dark-text">Descubra como fuciona o luciferianismo e a busca pela auto-iluminação.</span></li>
-            <li id="post2"><a href="#post2"><strong>Caminhos Vampiricos</strong></a><br><span class="dark-text">Explorando o vampirismo como metáfora para força e imortalidade.</span></li>
-            <li id="post3"><a href="#post3"><strong>Jurema: Sabedoria dos Ancestrais e Visões Espirituais</strong></a><br><span class="dark-text">Um guia sobre o uso espiritual da jurema em tradições brasileiras.</span></li>
-            <li id="post4"><a href="#post4"><strong>Biblioteca Negra: Magia desvendada</strong></a><br><span class="dark-text">Análise de textos mágicos e livros esotericos.</span></li>
-            <li id="post5"><a href="#post5"><strong>Luciferianismo e Vampirismo: Uma Fusão Negra</strong></a><br><span class="dark-text">Como combinar esses temas.</span></li>
-            <li id="post6"><a href="#post6"><strong>Preparando Jurema: Guia para Iniciantes</strong></a><br><span class="dark-text">Passos seguros para preparar infusões de jurema.</span></li>
-            <li id="post7"><a href="#post7"><strong>Invocações Noturnas: Chamando as Sombras</strong></a><br><span class="dark-text">Como trabalhar com o lado negro da força.</span></li>
-            <li id="post8"><a href="#post8"><strong>Histórias de Ordem: Experiências dos Adeptos</strong></a><br><span class="dark-text">Relatos pessoais de membros da Ordem.</span></li>
-        </ul>
-        <p class="dark-text">Para conteúdo completo, expanda cada postagem. Para uma cosulta basta solicitar em nossas redes sociais</p>
-        <blockquote>"Cada postagem é uma porta para o desconhecido."</blockquote>
-    </section>
-    
-    <footer>
-        <p>&copy; 2023 Ordem Esotérica não iniciatica.</p>
+
+    <div class="page-shell">
+        <aside class="library-sidebar" id="biblioteca" aria-labelledby="biblioteca-titulo">
+            <h2 id="biblioteca-titulo">Biblioteca</h2>
+            <p class="sidebar-note">Postagens do templo, estudos em preparo e futuras publicações.</p>
+            <ul class="library-list" id="libraryList"></ul>
+        </aside>
+
+        <main class="content">
+            <section class="section-panel fade-section" id="sobre">
+                <h2>Sobre a Ordem</h2>
+                <div class="text-columns">
+                    <p class="lead">Somos o Templo da Aurora Negra, uma ordem não iniciática dedicada ao estudo, preservação e difusão dos mistérios esotéricos e ocultistas.</p>
+                    <p>Nosso propósito é reunir, organizar e compartilhar saberes que transitam entre o luciferianismo, o vampirismo, a bruxaria, a necromancia e outras tradições ocultas.</p>
+                    <p>Buscamos ser um ponto de referência para aqueles que desejam compreender, aprofundar e vivenciar as ciências ocultas e a magia. Nosso trabalho não se limita apenas ao ensino, mas também à construção de um espaço vivo de diálogo, pesquisa e prática.</p>
+                    <p>Em um futuro próximo, expandiremos este projeto com a fundação de um templo físico, consagrado a Lúcifer, como farol e centro de convergência para todos que caminham por sendas alternativas de espiritualidade.</p>
+                </div>
+                <blockquote>"Nenhuma árvore pode crescer até o céu a menos que suas raízes alcancem o inferno." - Carl Jung</blockquote>
+                <img class="feature-image" src="https://i.ibb.co/DPQ94StC/Whats-App-Image-2025-10-24-at-13-38-10.jpg" alt="Imagem de temática vampírica">
+            </section>
+
+            <section class="section-panel fade-section" id="postagens">
+                <h2>Biblioteca de Postagens</h2>
+                <p class="lead">Explore estudos, reflexões e textos introdutórios. Os itens abaixo são gerados por JavaScript para facilitar novas publicações no futuro.</p>
+                <ul class="post-list" id="postList"></ul>
+                <blockquote>"Cada postagem é uma porta para o desconhecido."</blockquote>
+            </section>
+
+            <section class="section-panel fade-section" id="consultas">
+                <h2>Consultas</h2>
+                <p class="lead">Espaço reservado para orientações, leituras simbólicas e atendimentos ligados ao estudo ocultista do templo.</p>
+                <div class="card-grid" id="consultList"></div>
+                <div class="consult-actions" aria-label="Contatos para consultas">
+                    <a class="button-link" href="https://chat.whatsapp.com/ETsitk4HFUYKXC299AtYko?mode=wwt">WhatsApp</a>
+                    <a class="button-link" href="https://www.instagram.com/temploauroranegra?igsh=c3Jqa2V6MXdvenRj">Instagram</a>
+                </div>
+            </section>
+
+            <section class="section-panel fade-section" id="livros">
+                <h2>Livros</h2>
+                <p class="lead">Uma estante inicial para PDFs, leituras recomendadas e materiais próprios da ordem.</p>
+                <div class="card-grid" id="bookList"></div>
+            </section>
+
+            <section class="section-panel fade-section" id="projetos">
+                <h2>Projetos</h2>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Rituais de Jurema</h3>
+                        <p>Área em preparo para estudos, notas e práticas responsáveis dentro das tradições brasileiras.</p>
+                        <span class="tag">Em breve</span>
+                    </article>
+                    <article class="card">
+                        <h3>Vampirismo</h3>
+                        <p>Pesquisa simbólica sobre energia vital, força, disciplina e imortalidade como linguagem iniciática.</p>
+                        <span class="tag">Em breve</span>
+                    </article>
+                    <article class="card">
+                        <h3>Textos Heréticos</h3>
+                        <p>Arquivo futuro para ensaios autorais, manifestos e estudos internos do templo.</p>
+                        <span class="tag">Em breve</span>
+                    </article>
+                </div>
+                <blockquote>"O ritual é a ponte entre o mortal e o eterno."</blockquote>
+            </section>
+
+            <section class="section-panel fade-section" id="ferramentas">
+                <h2>Ferramentas</h2>
+                <p class="lead">Esta área está preparada para receber recursos interativos no futuro.</p>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>AURAX</h3>
+                        <p>O Código da Vontade Oculta: uma consulta simbólica sobre ego, sombra, desejo, comunicação, dinheiro, força interior e missão.</p>
+                        <a class="button-link" href="aurax.html">Abrir ferramenta</a>
+                    </article>
+                </div>
+                <div class="tool-placeholder">
+                    <h3>Possibilidades futuras</h3>
+                    <p>Oráculos digitais, biblioteca filtrável, calendário lunar, gerador de anotações ritualísticas e consultas guiadas podem nascer aqui sem mudar a estrutura do site.</p>
+                    <span class="tag">Base preparada</span>
+                </div>
+            </section>
+
+            <section class="section-panel fade-section" id="comunidade">
+                <h2>Comunidade</h2>
+                <p class="lead">Junte-se aos membros e acompanhe as futuras publicações do Templo Aurora Negra.</p>
+                <div class="consult-actions">
+                    <a class="button-link" href="https://chat.whatsapp.com/ETsitk4HFUYKXC299AtYko?mode=wwt">Entrar no WhatsApp</a>
+                    <a class="button-link" href="https://www.instagram.com/temploauroranegra?igsh=c3Jqa2V6MXdvenRj">Ver Instagram</a>
+                </div>
+                <blockquote>"Meu nome é Legião, porque somos muitos." - O Cálice Vampírico</blockquote>
+            </section>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Templo Aurora Negra. Ordem esotérica não iniciática.</p>
     </footer>
-    
+
     <script>
-        // Script simples para animação de fade-in
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }
-            });
-        });
-        
-        // Inicializar opacidade
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
-        });
+        const posts = [
+            {
+                id: "post1",
+                title: "A Etimologia de Lúcifer: Caminhos para a Iluminação",
+                excerpt: "Um estudo introdutório sobre o luciferianismo e a busca pela autoiluminação."
+            },
+            {
+                id: "post2",
+                title: "Caminhos Vampíricos",
+                excerpt: "Explorando o vampirismo como metáfora de força, disciplina e imortalidade simbólica."
+            },
+            {
+                id: "post3",
+                title: "Jurema: Sabedoria dos Ancestrais e Visões Espirituais",
+                excerpt: "Notas sobre o uso espiritual da jurema em tradições brasileiras."
+            },
+            {
+                id: "post4",
+                title: "Biblioteca Negra: Magia Desvendada",
+                excerpt: "Análise de textos mágicos, grimórios e livros esotéricos."
+            },
+            {
+                id: "post5",
+                title: "Luciferianismo e Vampirismo: Uma Fusão Negra",
+                excerpt: "Como esses símbolos podem dialogar dentro de uma prática de autoconhecimento."
+            },
+            {
+                id: "post6",
+                title: "Preparando Jurema: Guia para Iniciantes",
+                excerpt: "Material futuro sobre estudo, responsabilidade e contexto espiritual."
+            },
+            {
+                id: "post7",
+                title: "Invocações Noturnas: Chamando as Sombras",
+                excerpt: "Reflexões sobre sombra, vontade e linguagem ritualística."
+            },
+            {
+                id: "post8",
+                title: "Histórias de Ordem: Experiências dos Adeptos",
+                excerpt: "Relatos e memórias de estudo, prática e comunidade."
+            }
+        ];
+
+        const books = [
+            {
+                title: "O Manifesto Luciférico",
+                description: "Rebelião, soberania interior e iluminação pessoal.",
+                status: "Em breve"
+            },
+            {
+                title: "Vampirismo Moderno",
+                description: "Energia vital, magnetismo, disciplina e imortalidade simbólica.",
+                status: "Em breve"
+            },
+            {
+                title: "Rituais com Jurema",
+                description: "Notas e estudos para cerimônias espirituais responsáveis.",
+                status: "Em breve"
+            },
+            {
+                title: "Textos Heréticos da Ordem",
+                description: "Coleção de escritos, ensaios e reflexões do Templo Aurora Negra.",
+                status: "Em breve"
+            }
+        ];
+
+        const consultations = [
+            {
+                title: "Orientação Esotérica",
+                description: "Atendimento introdutório para dúvidas sobre caminhos, leituras e estudos ocultistas."
+            },
+            {
+                title: "Leitura Simbólica",
+                description: "Interpretação de símbolos, sonhos e temas espirituais a partir da tradição do templo."
+            },
+            {
+                title: "Pesquisa Ritualística",
+                description: "Apoio para organizar estudos, referências e práticas com responsabilidade."
+            }
+        ];
+
+        // Para novos textos completos da Biblioteca, adicione "url" ao item.
+        // Exemplo: { id: "post9", title: "Novo Texto", excerpt: "...", url: "leituras/novo-texto.html" }
+        const libraryList = document.querySelector("#libraryList");
+        const postList = document.querySelector("#postList");
+        const bookList = document.querySelector("#bookList");
+        const consultList = document.querySelector("#consultList");
+
+        function renderPosts() {
+            libraryList.innerHTML = posts.map(post => `
+                <li><a href="${post.url || `#${post.id}`}">${post.title}</a></li>
+            `).join("");
+
+            postList.innerHTML = posts.map(post => `
+                <li class="post-card" id="${post.id}">
+                    <a href="${post.url || `#${post.id}`}">${post.title}</a>
+                    <p>${post.excerpt}</p>
+                </li>
+            `).join("");
+        }
+
+        function renderBooks() {
+            bookList.innerHTML = books.map(book => `
+                <article class="card">
+                    <h3>${book.title}</h3>
+                    <p>${book.description}</p>
+                    <span class="tag">${book.status}</span>
+                </article>
+            `).join("");
+        }
+
+        function renderConsultations() {
+            consultList.innerHTML = consultations.map(item => `
+                <article class="card">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <span class="tag">Solicitar pelas redes</span>
+                </article>
+            `).join("");
+        }
+
+        function revealSections() {
+            const sections = document.querySelectorAll(".fade-section");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        renderPosts();
+        renderBooks();
+        renderConsultations();
+        revealSections();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
