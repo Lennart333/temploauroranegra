@@ -785,16 +785,21 @@
             const libList  = document.getElementById('libraryList');
             const postList = document.getElementById('postList');
 
-            libList.innerHTML = posts.map(p =>
-                `<li><a href="${p.url || '#' + p.id}">${p.title}</a></li>`
-            ).join('');
+            libList.innerHTML = posts.map(p => {
+                const temPagina = p.url && !p.url.startsWith('#');
+                if (temPagina) {
+                    return `<li><a href="${p.url}">${p.title}</a></li>`;
+                }
+                return `<li><span style="display:block;padding:10px 14px;color:var(--dusk);font-size:0.88rem;line-height:1.4;border-left:2px solid rgba(139,0,0,0.2);border-radius:0 4px 4px 0;">${p.title} <em style="font-size:0.76rem;opacity:.55">— em breve</em></span></li>`;
+            }).join('');
 
-            postList.innerHTML = posts.map(p => `
-                <li class="post-card" id="${p.id}">
-                    <a href="${p.url || '#' + p.id}">${p.title}</a>
-                    <p>${p.excerpt}</p>
-                </li>`
-            ).join('');
+            postList.innerHTML = posts.map(p => {
+                const temPagina = p.url && !p.url.startsWith('#');
+                const titulo = temPagina
+                    ? `<a href="${p.url}">${p.title}</a>`
+                    : `<span style="color:var(--rose);font-family:'Cinzel',serif;font-size:0.97rem;font-weight:600;">${p.title} <em style="font-size:0.8rem;color:var(--dusk);font-style:italic;font-weight:400;margin-left:6px;">— em breve</em></span>`;
+                return `<li class="post-card" id="${p.id}">${titulo}<p>${p.excerpt}</p></li>`;
+            }).join('');
         }
 
         function renderBooks() {
