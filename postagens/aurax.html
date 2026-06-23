@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURAX — O Mapa da Vontade Oculta · Templo Aurora Negra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=UnifrakturMaguntia&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        /* ── TOKENS ───────────────────────────────────────────── */
+        :root {
+            --ink:       #0a0507;
+            --ink-soft:  #110809;
+            --crimson:   #8b0000;
+            --crimson-2: #6b0000;
+            --ember:     #c0392b;
+            --rose:      #e07070;
+            --ash:       #c8baba;
+            --dusk:      #8a7878;
+            --veil:      rgba(10, 5, 7, 0.88);
+            --veil-deep: rgba(14, 6, 8, 0.96);
+            --seam:      rgba(139, 0, 0, 0.55);
+            --glow:      rgba(139, 0, 0, 0.28);
+            --r:         6px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 18px;
+            color: var(--ash);
+            line-height: 1.8;
+            background: var(--ink);
+            background-image:
+                radial-gradient(ellipse 60% 40% at 15% 0%, rgba(139,0,0,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 35% at 88% 12%, rgba(180,30,30,0.1) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 50% 100%, rgba(80,0,0,0.22) 0%, transparent 70%);
+            overflow-x: hidden;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        a { color: var(--rose); text-decoration: none; transition: color .2s; }
+        a:hover, a:focus-visible { color: #fff; }
+
+        /* ── HEADER ───────────────────────────────────────────── */
+        .aurax-header {
+            position: relative;
+            min-height: 480px;
+            display: grid;
+            place-items: center;
+            padding: 72px 24px 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--seam);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .aurax-header__bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.88) 100%),
+                url("https://i.ibb.co/ZzkKCNTX/1000001097.png") center / 260px no-repeat;
+            opacity: 0.5;
+        }
+
+        .aurax-header__vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.88) 100%);
+            pointer-events: none;
+        }
+
+        .aurax-header::before,
+        .aurax-header::after {
+            content: '';
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--seam), transparent);
+        }
+        .aurax-header::before { top: 28px; }
+        .aurax-header::after  { bottom: 28px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 400;
+            color: #fff;
+            line-height: 0.9;
+            text-shadow:
+                0 0 24px rgba(139,0,0,0.9),
+                0 0 60px rgba(139,0,0,0.5);
+            letter-spacing: 0.02em;
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 0 0 22px rgba(139,0,0,0.85), 0 0 55px rgba(139,0,0,0.45); }
+            50%       { text-shadow: 0 0 34px rgba(192,57,43,1), 0 0 80px rgba(192,57,43,0.6); }
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            justify-content: center;
+            margin: 18px 0;
+        }
+        .hero-divider span {
+            display: block;
+            height: 1px;
+            width: 70px;
+            background: linear-gradient(to right, transparent, var(--rose));
+        }
+        .hero-divider span:last-child {
+            background: linear-gradient(to left, transparent, var(--rose));
+        }
+        .hero-divider em {
+            font-style: normal;
+            color: var(--rose);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+            font-weight: 500;
+            color: var(--rose);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .intro {
+            margin-top: 16px;
+            color: #e8d8d8;
+            font-style: italic;
+            font-size: 1.08rem;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── NAV ──────────────────────────────────────────────── */
+        .top-actions {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 12px 20px;
+            background: rgba(8, 3, 4, 0.97);
+            border-bottom: 1px solid var(--seam);
+            backdrop-filter: blur(18px);
+        }
+
+        .button-link {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 18px;
+            border: 1px solid var(--seam);
+            border-radius: var(--r);
+            color: var(--ash);
+            background: transparent;
+            font-family: 'Cinzel', serif;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color .2s, background .2s, border-color .2s, box-shadow .2s;
+        }
+        .button-link:hover, .button-link:focus-visible {
+            color: #fff;
+            background: rgba(139,0,0,0.22);
+            border-color: var(--rose);
+            box-shadow: 0 0 14px rgba(139,0,0,0.25);
+        }
+
+        /* ── LAYOUT ───────────────────────────────────────────── */
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(290px, 400px) minmax(0, 1fr);
+            gap: 28px;
+            width: min(1320px, 100%);
+            margin: 0 auto;
+            padding: 36px 28px 72px;
+            align-items: start;
+        }
+
+        /* ── PANELS ───────────────────────────────────────────── */
+        .panel {
+            padding: clamp(24px, 4vw, 40px);
+            background: var(--veil);
+            border: 1px solid var(--seam);
+            border-radius: var(--r);
+            box-shadow: 0 0 36px rgba(0,0,0,0.3), 0 0 20px rgba(139,0,0,0.1);
+        }
+
+        .form-panel {
+            position: sticky;
+            top: 76px;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+            font-weight: 600;
+            color: var(--ember);
+            line-height: 1.15;
+            margin-bottom: 18px;
+            letter-spacing: 0.05em;
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--rose);
+            margin-bottom: 8px;
+        }
+
+        .eyebrow {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--dusk);
+            margin-bottom: 6px;
+        }
+
+        /* ── FORM ─────────────────────────────────────────────── */
+        .notice {
+            margin-bottom: 22px;
+            padding: 14px 16px;
+            color: #f0dede;
+            background: rgba(139,0,0,0.1);
+            border: 1px solid rgba(224,112,112,0.35);
+            border-left: 3px solid var(--crimson);
+            border-radius: 0 var(--r) var(--r) 0;
+            font-size: 0.92rem;
+            font-style: italic;
+        }
+
+        .field {
+            display: grid;
+            gap: 7px;
+            margin-bottom: 16px;
+        }
+
+        label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #e0d0d0;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            min-height: 46px;
+            padding: 10px 14px;
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(139,0,0,0.65);
+            border-radius: var(--r);
+            font: inherit;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        textarea { min-height: 110px; resize: vertical; }
+
+        input:focus, textarea:focus {
+            border-color: var(--rose);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.16);
+        }
+
+        .primary-button {
+            width: 100%;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(139,0,0,0.85), rgba(70,5,12,0.95));
+            border: 1px solid rgba(224,112,112,0.5);
+            border-radius: var(--r);
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s, box-shadow .2s;
+        }
+        .primary-button:hover, .primary-button:focus-visible {
+            background: linear-gradient(135deg, rgba(192,57,43,0.9), rgba(100,10,20,0.95));
+            box-shadow: 0 0 24px rgba(139,0,0,0.4);
+        }
+
+        /* ── RESULT ───────────────────────────────────────────── */
+        .result-panel { min-height: 540px; }
+
+        .empty-state {
+            min-height: 440px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            border: 1px dashed rgba(224,112,112,0.35);
+            border-radius: var(--r);
+            padding: 24px;
+            background: rgba(139,0,0,0.04);
+            color: var(--dusk);
+            font-style: italic;
+        }
+
+        .identity {
+            padding: 20px 22px;
+            margin-bottom: 22px;
+            background: linear-gradient(135deg, rgba(139,0,0,0.14), rgba(0,0,0,0.28));
+            border: 1px solid rgba(224,112,112,0.3);
+            border-radius: var(--r);
+        }
+        .identity > span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--dusk);
+        }
+        .identity strong {
+            display: block;
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            font-size: clamp(1.25rem, 3vw, 1.9rem);
+            line-height: 1.18;
+            margin-top: 4px;
+        }
+        .formula {
+            color: var(--rose);
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .card {
+            padding: 18px;
+            background: var(--veil-deep);
+            border: 1px solid rgba(139,0,0,0.5);
+            border-radius: var(--r);
+            box-shadow: inset 0 0 18px rgba(139,0,0,0.07);
+        }
+        .card span {
+            display: block;
+            color: var(--dusk);
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .card strong {
+            display: block;
+            margin-top: 6px;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+        }
+
+        .reading-section { margin-top: 26px; }
+
+        .section-rule {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .section-rule::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--seam), transparent);
+        }
+
+        .premium-block {
+            display: grid;
+            gap: 14px;
+            margin-top: 16px;
+            padding: 20px 22px;
+            background: rgba(139,0,0,0.07);
+            border: 1px solid rgba(139,0,0,0.38);
+            border-left: 3px solid var(--crimson-2);
+            border-radius: 0 var(--r) var(--r) 0;
+        }
+        .premium-block p { margin: 0; text-align: justify; }
+
+        .node-reading {
+            display: grid;
+            gap: 14px;
+            padding: 22px;
+            background: var(--veil-deep);
+            border: 1px solid rgba(139,0,0,0.5);
+            border-radius: var(--r);
+        }
+        .node-reading p { margin: 0; text-align: justify; }
+        .node-reading .phrase {
+            color: #fff;
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        .archetype-list { display: grid; gap: 16px; }
+
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .mini-grid div {
+            padding: 12px 14px;
+            background: rgba(139,0,0,0.07);
+            border: 1px solid rgba(139,0,0,0.3);
+            border-radius: 4px;
+            font-size: 0.93rem;
+        }
+        .mini-grid b { color: #fff; }
+
+        .premium {
+            margin-top: 30px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(139,0,0,0.2), rgba(0,0,0,0.45));
+            border: 1px solid rgba(224,112,112,0.42);
+            border-radius: var(--r);
+        }
+        .premium p { margin: 14px 0; color: var(--ash); }
+
+        /* ── BUTTONS RESULT ───────────────────────────────────── */
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        button:not(.primary-button) {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 18px;
+            border: 1px solid var(--seam);
+            border-radius: var(--r);
+            color: var(--ash);
+            background: transparent;
+            font-family: 'Cinzel', serif;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color .2s, background .2s, border-color .2s;
+        }
+        button:not(.primary-button):hover, button:not(.primary-button):focus-visible {
+            color: #fff;
+            background: rgba(139,0,0,0.22);
+            border-color: var(--rose);
+        }
+
+        .copy-status {
+            min-height: 22px;
+            margin-top: 8px;
+            color: var(--rose);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* ── FOOTER ───────────────────────────────────────────── */
+        .site-footer {
+            position: relative;
+            z-index: 1;
+            padding: 32px 20px;
+            text-align: center;
+            background: linear-gradient(to top, #000 0%, #160608 100%);
+            border-top: 1px solid var(--seam);
+            color: var(--dusk);
+            font-size: 0.88rem;
+        }
+
+        /* ── RESPONSIVE ───────────────────────────────────────── */
+        @media (max-width: 980px) {
+            .page-shell {
+                grid-template-columns: 1fr;
+                padding-inline: 18px;
+            }
+            .form-panel { position: static; }
+        }
+
+        @media (max-width: 640px) {
+            .aurax-header { min-height: 400px; padding: 56px 18px 64px; }
+            h1 { font-size: clamp(4rem, 18vw, 6rem); }
+            .top-actions {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
+            }
+            .top-actions::-webkit-scrollbar { display: none; }
+            .button-link { flex: 0 0 auto; }
+            .button-row button,
+            .button-row .button-link { width: 100%; }
+        }
+
+        @media print {
+            body { background: #fff; color: #111; }
+            body::after, .aurax-header, .top-actions, .form-panel,
+            .button-row, .copy-status, .site-footer { display: none !important; }
+            .page-shell { display: block; padding: 0; }
+            .panel, .card, .premium { border-color: #999; box-shadow: none; background: #fff; color: #111; }
+            h1, h2, h3, .formula, .card strong, .mini-grid b { color: #111; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            h1 { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══════════════════════════════════════════ -->
+    <header class="aurax-header">
+        <div class="aurax-header__bg" aria-hidden="true"></div>
+        <div class="aurax-header__vignette" aria-hidden="true"></div>
+        <div class="hero-content">
+            <h1>AURAX</h1>
+            <div class="hero-divider" aria-hidden="true">
+                <span></span>
+                <em>Templo Aurora Negra</em>
+                <span></span>
+            </div>
+            <p class="subtitle">O Mapa da Vontade Oculta</p>
+            <p class="intro">Insira seus dados e revele os mistérios da sua personalidade: ego, sombra, desejo, comunicação, dinheiro, força interior e missão.</p>
+        </div>
+    </header>
+
+    <!-- ═══ NAVEGAÇÃO ════════════════════════════════════════ -->
+    <nav class="top-actions" aria-label="Ações">
+        <a class="button-link" href="index.html#ferramentas">← Voltar ao Templo</a>
+        <a class="button-link" href="#consulta">Consulta</a>
+        <a class="button-link" href="#resultado">Resultado</a>
+    </nav>
+
+    <!-- ═══ CONTEÚDO ═════════════════════════════════════════ -->
+    <main class="page-shell" id="consulta">
+
+        <!-- FORMULÁRIO -->
+        <section class="panel form-panel" aria-labelledby="form-title">
+            <span class="eyebrow">Consulta Simbólica</span>
+            <h2 id="form-title">Código AURAX</h2>
+            <p class="notice">Esta ferramenta é uma leitura simbólica. Não substitui aconselhamento profissional, diagnóstico psicológico, médico, jurídico ou financeiro.</p>
+
+            <form id="auraxForm">
+                <div class="field">
+                    <label for="fullName">Nome completo</label>
+                    <input id="fullName" name="fullName" type="text" autocomplete="name" required placeholder="Seu nome de registro">
+                </div>
+                <div class="field">
+                    <label for="birthDate">Data de nascimento</label>
+                    <input id="birthDate" name="birthDate" type="date" required>
+                </div>
+                <div class="field">
+                    <label for="birthTime">Hora de nascimento</label>
+                    <input id="birthTime" name="birthTime" type="time" required>
+                </div>
+                <div class="field">
+                    <label for="socialName">Nome social ou apelido <span style="font-weight:400;opacity:.7">(opcional)</span></label>
+                    <input id="socialName" name="socialName" type="text" autocomplete="nickname" placeholder="Como prefere ser chamado">
+                </div>
+                <div class="field">
+                    <label for="centralQuestion">Pergunta central <span style="font-weight:400;opacity:.7">(opcional)</span></label>
+                    <textarea id="centralQuestion" name="centralQuestion" placeholder="Escreva a questão que deseja atravessar simbolicamente."></textarea>
+                </div>
+                <button class="primary-button" type="submit">Revelar meu Código AURAX</button>
+            </form>
+        </section>
+
+        <!-- RESULTADO -->
+        <section class="panel result-panel" id="resultado" aria-live="polite">
+            <div class="empty-state">
+                <div>
+                    <p style="font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;">Aguardando consulta</p>
+                    <p>Preencha o formulário para abrir o mapa simbólico da sua vontade oculta.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Templo Aurora Negra &mdash; AURAX é uma ferramenta simbólica de autoconhecimento.</p>
+    </footer>
+
+    <script>
+const pitagorica = {
+            A: 1, J: 1, S: 1,
+            B: 2, K: 2, T: 2,
+            C: 3, L: 3, U: 3,
+            D: 4, M: 4, V: 4,
+            E: 5, N: 5, W: 5,
+            F: 6, O: 6, X: 6,
+            G: 7, P: 7, Y: 7,
+            H: 8, Q: 8, Z: 8,
+            I: 9, R: 9
+        };
+
+        const archetypes = {
+            1: {
+                name: "O Iniciador",
+                luz: "abre caminhos, decide com firmeza e desperta movimento onde havia estagnação.",
+                sombra: "pode confundir vontade com imposição e agir antes de escutar os sinais.",
+                conselho: "use sua chama como direção, não como incêndio.",
+                ego: "precisa sentir autoria e independência.",
+                emocao: "protege sua vulnerabilidade com ação rápida.",
+                acao: "vence quando inicia sem abandonar a continuidade.",
+                comunicacao: "fala de modo direto e provocador.",
+                dinheiro: "prospera ao liderar, vender ideias e criar oportunidades próprias.",
+                missao: "acender coragem em si e nos outros."
+            },
+            2: {
+                name: "O Espelho",
+                luz: "percebe nuances, acolhe contradições e revela o que está oculto nas relações.",
+                sombra: "pode se perder no desejo do outro e hesitar diante da própria vontade.",
+                conselho: "não entregue seu centro para manter paz aparente.",
+                ego: "se reconhece pela troca e pela sensibilidade.",
+                emocao: "absorve atmosferas com intensidade.",
+                acao: "age melhor quando sente confiança no vínculo.",
+                comunicacao: "convence pela escuta e pela sutileza.",
+                dinheiro: "cresce em parcerias, cuidado, mediação e trabalhos de confiança.",
+                missao: "ensinar presença, diplomacia e consciência relacional."
+            },
+            3: {
+                name: "O Encantador",
+                luz: "transforma ideias em expressão, beleza, linguagem e magnetismo.",
+                sombra: "pode dispersar energia, seduzir sem sustentar e fugir da profundidade.",
+                conselho: "faça da palavra um altar, não uma máscara.",
+                ego: "busca ser visto, ouvido e admirado.",
+                emocao: "cura quando cria e compartilha.",
+                acao: "precisa de ritmo criativo e prazer no processo.",
+                comunicacao: "é seu território de poder natural.",
+                dinheiro: "flui por arte, ensino, escrita, estética, influência e comunicação.",
+                missao: "dar forma encantatória ao invisível."
+            },
+            4: {
+                name: "O Construtor",
+                luz: "cria estrutura, sustenta processos e transforma visão em matéria.",
+                sombra: "pode endurecer, controlar demais e temer mudanças necessárias.",
+                conselho: "disciplina é ponte; prisão é excesso de defesa.",
+                ego: "se fortalece quando sente competência e estabilidade.",
+                emocao: "prefere demonstrar cuidado por atitudes concretas.",
+                acao: "avança por método, repetição e compromisso.",
+                comunicacao: "é objetiva, séria e prática.",
+                dinheiro: "cresce com planejamento, gestão, técnica e construção de patrimônio.",
+                missao: "erguer bases para que o oculto tenha corpo."
+            },
+            5: {
+                name: "O Errante",
+                luz: "rompe limites, atravessa mundos e descobre saídas onde outros veem muros.",
+                sombra: "pode confundir liberdade com fuga e intensidade com direção.",
+                conselho: "escolha uma rota para que sua liberdade vire poder.",
+                ego: "precisa de movimento, experiência e autonomia.",
+                emocao: "muda rápido e pede espaço para respirar.",
+                acao: "age por impulso visionário e adaptação.",
+                comunicacao: "é versátil, persuasiva e inquieta.",
+                dinheiro: "prospera em movimento, vendas, viagens, tecnologia, redes e mudanças.",
+                missao: "abrir portais de possibilidade."
+            },
+            6: {
+                name: "O Guardião",
+                luz: "protege, harmoniza, orienta e dá forma sagrada ao cuidado.",
+                sombra: "pode carregar pesos que não são seus e controlar em nome do amor.",
+                conselho: "cuidar não exige sacrificar sua própria chama.",
+                ego: "se reconhece ao ser necessário e confiável.",
+                emocao: "ama com profundidade e senso de responsabilidade.",
+                acao: "age para restaurar ordem, beleza e vínculo.",
+                comunicacao: "é afetuosa, firme e conselheira.",
+                dinheiro: "cresce em serviços, cura simbólica, estética, família, educação e acolhimento.",
+                missao: "guardar o sagrado sem aprisioná-lo."
+            },
+            7: {
+                name: "O Oculto",
+                luz: "investiga profundezas, atravessa mistérios e busca verdade além da superfície.",
+                sombra: "pode isolar-se, desconfiar demais e usar silêncio como muralha.",
+                conselho: "o segredo amadurece no silêncio, mas floresce quando encontra linguagem.",
+                ego: "se fortalece pela sabedoria e pela autonomia mental.",
+                emocao: "processa tudo em camadas internas.",
+                acao: "age melhor depois de observar padrões.",
+                comunicacao: "é precisa, enigmática e seletiva.",
+                dinheiro: "prospera em pesquisa, estudo, tecnologia, ocultismo, estratégia e análise.",
+                missao: "revelar o invisível sem profaná-lo."
+            },
+            8: {
+                name: "O Dominador",
+                luz: "concentra força, estratégia, ambição e capacidade de materializar poder.",
+                sombra: "pode buscar controle absoluto e medir valor apenas por vitória.",
+                conselho: "domine primeiro seus impulsos, depois o mundo obedecerá melhor.",
+                ego: "precisa sentir autoridade, respeito e potência.",
+                emocao: "vive intensidade, mas evita parecer vulnerável.",
+                acao: "age com foco, impacto e magnetismo executivo.",
+                comunicacao: "é forte, estratégica e impositiva.",
+                dinheiro: "tem poder para gestão, negócios, liderança, finanças e influência.",
+                missao: "aprender o uso ético da força."
+            },
+            9: {
+                name: "O Profeta",
+                luz: "sintetiza ciclos, inspira pessoas e enxerga sentido onde há caos.",
+                sombra: "pode salvar demais, idealizar demais e esquecer seus próprios limites.",
+                conselho: "visão sem encarnação vira névoa; traga sua mensagem para a terra.",
+                ego: "se reconhece por propósito e transcendência.",
+                emocao: "sente amplamente, como se tocasse muitas vidas ao mesmo tempo.",
+                acao: "age por missão, encerramento de ciclos e inspiração coletiva.",
+                comunicacao: "é simbólica, poética e visionária.",
+                dinheiro: "flui quando propósito, serviço e arte encontram estrutura.",
+                missao: "traduzir dor em sabedoria e sabedoria em caminho."
+            }
+        };
+
+        const auraxLibrary = {
+            1: {
+                name: "O Iniciador",
+                title: "força, autonomia e vontade de abertura",
+                general: "O Iniciador representa a força do começo, da afirmação individual e da vontade de existir com autonomia. É o arquétipo daquele que abre caminhos, toma decisões, assume riscos e deseja ser reconhecido pela própria força. Sua energia é direta, objetiva, competitiva e voltada para conquista.",
+                light: "Coragem, iniciativa, liderança, autonomia, autoconfiança, força de decisão, capacidade de começar projetos e romper bloqueios.",
+                shadow: "Arrogância, impaciência, egoísmo, isolamento, agressividade, dificuldade de ouvir conselhos e tendência a querer vencer sozinho.",
+                phrase: "Eu existo pela força da minha própria vontade.",
+                advice: "Lidere sem esmagar. A verdadeira força do Iniciador aparece quando sua vontade tem direção, estratégia e consciência.",
+                cores: {
+                    solar: "No Núcleo Solar, o Iniciador indica uma pessoa que deseja ser vista como forte, independente e capaz. A imagem pessoal tende a ser construída em torno de coragem, autonomia e autoridade. Essa pessoa pode não gostar de parecer fraca, dependente ou indecisa. Quando está em equilíbrio, transmite presença, liderança e iniciativa. Quando está em tensão, pode transformar tudo em prova de força.",
+                    lunar: "No Núcleo Lunar, o Iniciador indica emoções intensas, mas pouco demonstradas de forma vulnerável. A pessoa pode sentir necessidade de controlar as próprias emoções e detestar depender emocionalmente de alguém. Quando ferida, pode reagir com orgulho, distanciamento ou irritação, como se mostrar dor fosse entregar poder.",
+                    marcial: "No Núcleo Marcial, o Iniciador age de maneira direta. Em conflito, tende a enfrentar, cortar, decidir ou impor limites rapidamente. Seu desafio é não transformar toda discordância em disputa de poder. A ação é forte, mas precisa de direção para não virar ataque.",
+                    mercurial: "No Núcleo Mercurial, a comunicação é assertiva, firme e muitas vezes dominante. A pessoa pode falar com autoridade, abrir discussões difíceis e defender ideias com força. Precisa tomar cuidado para não soar agressiva, impaciente ou autoritária quando deseja apenas ser clara.",
+                    sombrio: "No Núcleo Sombrio, a ferida central está ligada ao medo de ser dominado, apagado ou tratado como fraco. Pode haver orgulho defensivo, dificuldade em pedir ajuda e tendência a rejeitar conselhos. A autossabotagem surge quando a pessoa prefere perder sozinha a admitir necessidade de apoio.",
+                    aureo: "No Núcleo Áureo, a pessoa prospera quando lidera, empreende, decide e cria seus próprios caminhos. Tem potencial para dinheiro através de autonomia, negócios próprios, cargos de comando ou projetos onde possa ser protagonista. O bloqueio aparece quando tenta fazer tudo sozinha ou rejeita alianças úteis.",
+                    divino: "No Núcleo Divino, a missão envolve desenvolver coragem, independência e liderança madura. O chamado é iniciar algo, abrir caminho e inspirar outras pessoas pela própria força. A evolução acontece quando a vontade deixa de ser reação e se torna direção consciente.",
+                    temporal: "No Portal Temporal, a hora de nascimento reforça impulso, iniciativa e necessidade de movimento. A pessoa pode sentir urgência em se provar ou conquistar algo próprio. Essa vibração complementar pede ação, mas também pede pausa estratégica antes de cada ruptura."
+                }
+            },
+            2: {
+                name: "O Espelho",
+                title: "sensibilidade, vínculo e percepção afetiva",
+                general: "O Espelho representa sensibilidade, vínculo, escuta e percepção emocional. É o arquétipo de quem sente o ambiente, capta intenções e busca conexão. Sua força está na diplomacia, na intuição afetiva e na capacidade de compreender o outro.",
+                light: "Empatia, diplomacia, paciência, intuição, sensibilidade, cooperação, escuta e capacidade de criar vínculos profundos.",
+                shadow: "Dependência emocional, medo de rejeição, passividade, insegurança, excesso de adaptação, carência e dificuldade de impor limites.",
+                phrase: "Eu sinto o outro, mas preciso lembrar de mim.",
+                advice: "Não confunda amor com submissão. Sua sensibilidade é uma dádiva, mas precisa de limites.",
+                cores: {
+                    solar: "No Núcleo Solar, o Espelho indica uma pessoa que deseja ser vista como gentil, sensível, parceira e confiável. A imagem pessoal pode ser construída em torno de cuidado, lealdade e harmonia. O brilho vem da capacidade de acolher, mas a armadilha é depender da aprovação do olhar alheio.",
+                    lunar: "No Núcleo Lunar, a carência afetiva é forte. A pessoa pode sentir muito medo de rejeição, abandono ou frieza emocional. Precisa de segurança, confirmação e presença. Quando se sente ameaçada, pode interpretar distância como desamor e silêncio como perigo.",
+                    marcial: "No Núcleo Marcial, a pessoa evita conflitos diretos. Pode tentar agradar, negociar ou silenciar para preservar a paz. O risco é acumular ressentimento e explodir depois. A defesa verdadeira nasce quando aprende a dizer não antes de se ferir.",
+                    mercurial: "No Núcleo Mercurial, a comunicação é diplomática, emocional e adaptável. A pessoa pode saber dizer o que o outro quer ouvir, mas precisa evitar manipulação por vitimismo ou indiretas. Sua palavra tem poder quando une delicadeza e clareza.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada à rejeição, abandono e necessidade de validação. A pessoa pode se anular para manter relações ou testar o amor dos outros. A autossabotagem aparece quando troca verdade por aceitação.",
+                    aureo: "No Núcleo Áureo, o dinheiro pode vir através de parcerias, atendimento, cuidado, estética, acolhimento, serviços humanos e trabalhos que envolvem conexão. O bloqueio é medo de cobrar, medo de se posicionar ou culpa por receber.",
+                    divino: "No Núcleo Divino, a missão é aprender a amar sem se perder. A pessoa evolui quando transforma sensibilidade em sabedoria e vínculos em força, não dependência. Seu caminho espiritual pede presença, reciprocidade e limites sagrados.",
+                    temporal: "No Portal Temporal, a hora reforça sensibilidade e busca por harmonia. A pessoa pode nascer com uma vibração de conexão, mediação e percepção emocional. Esse portal pede que a intuição seja escutada sem virar submissão."
+                }
+            },
+            3: {
+                name: "O Encantador",
+                title: "expressão, beleza e magnetismo social",
+                general: "O Encantador representa expressão, beleza, criatividade, charme e presença social. É o arquétipo de quem comunica, seduz, cria atmosfera e influencia pela estética ou pela palavra. Sua força está em tocar emoções através da imagem, da fala e da sensibilidade expressiva.",
+                light: "Carisma, criatividade, comunicação, beleza, expressão artística, magnetismo social, alegria e poder de encantar.",
+                shadow: "Vaidade, dispersão, teatralidade, necessidade de validação, drama, superficialidade e medo de não ser admirado.",
+                phrase: "Eu quero ser visto, sentido e lembrado.",
+                advice: "Use seu encanto para construir algo sólido. Ser admirado é bom, mas ser lembrado por uma obra é melhor.",
+                cores: {
+                    solar: "No Núcleo Solar, o Encantador indica uma pessoa que deseja ser percebida, admirada e reconhecida. A imagem pessoal é ligada a charme, beleza, comunicação, expressão e presença. Quando amadurece, encanta por autenticidade; quando se perde, busca aplauso para esconder insegurança.",
+                    lunar: "No Núcleo Lunar, as emoções precisam de expressão. A pessoa pode sofrer quando sente que não é ouvida, desejada ou valorizada. Pode dramatizar dores para ser percebida. A cura vem quando aprende a expressar sem depender de plateia.",
+                    marcial: "No Núcleo Marcial, a ação vem através da criatividade e da fala. Em conflito, pode usar ironia, charme, provocação ou teatralidade. O desafio é agir com consistência, não apenas emoção. Sua força cresce quando o brilho encontra método.",
+                    mercurial: "No Núcleo Mercurial, a comunicação é uma arma natural. A pessoa pode convencer, atrair, divertir e emocionar. Precisa evitar exagero, fofoca, manipulação estética ou fala vazia. Sua palavra é magnética quando serve a uma verdade.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada à invisibilidade. A pessoa teme ser comum, esquecida ou não desejada. Pode buscar atenção mesmo quando isso prejudica sua estabilidade. A sombra pede reconhecimento interno antes da validação externa.",
+                    aureo: "No Núcleo Áureo, prospera com comunicação, imagem, beleza, arte, redes sociais, vendas, conteúdo, moda, estética, entretenimento e influência. O bloqueio é dispersão, falta de método e prazer sem continuidade.",
+                    divino: "No Núcleo Divino, a missão é expressar algo que inspire. A pessoa evolui quando transforma encanto em criação real, e não apenas busca validação. Sua missão pede obra, voz e presença com propósito.",
+                    temporal: "No Portal Temporal, a hora reforça magnetismo, expressão, vaidade saudável, estética e necessidade de comunicação. Esse portal pede que a pessoa fale, crie e apareça, mas sem se aprisionar à necessidade de aplauso."
+                }
+            },
+            4: {
+                name: "O Construtor",
+                title: "estrutura, disciplina e materialização",
+                general: "O Construtor representa disciplina, estrutura, ordem, trabalho e materialização. É o arquétipo daquele que transforma ideias em realidade por meio de método, paciência e constância.",
+                light: "Disciplina, foco, organização, responsabilidade, lealdade, estabilidade, resistência e capacidade de construir bases sólidas.",
+                shadow: "Rigidez, medo de mudança, teimosia, pessimismo, excesso de controle, frieza prática e dificuldade de relaxar.",
+                phrase: "Eu construo aquilo que outros apenas imaginam.",
+                advice: "Sua constância é poder. Mas lembre-se: estrutura demais também pode sufocar a vida.",
+                cores: {
+                    solar: "No Núcleo Solar, o Construtor quer ser visto como confiável, sério, responsável e competente. Sua imagem está ligada a esforço, estrutura e estabilidade. A ambição nasce do desejo de provar solidez e deixar resultados concretos.",
+                    lunar: "No Núcleo Lunar, a pessoa busca segurança emocional através de rotina, previsibilidade e compromisso. Mudanças bruscas podem gerar ansiedade. O coração precisa sentir que existe chão antes de relaxar.",
+                    marcial: "No Núcleo Marcial, age com persistência e método. Em conflito, pode ser duro, resistente e inflexível. O desafio é não transformar razão em muralha. Sua defesa é construir controle, mas nem toda emoção precisa ser administrada como obra.",
+                    mercurial: "No Núcleo Mercurial, comunica-se de forma prática, objetiva e lógica. Pode ter dificuldade com conversas muito emocionais ou ambíguas. Sua palavra convence quando organiza o caos e oferece caminho claro.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada ao caos, instabilidade e perda de controle. Pode haver medo de confiar, de arriscar ou de mudar. A autossabotagem surge quando a pessoa escolhe segurança morta em vez de crescimento vivo.",
+                    aureo: "No Núcleo Áureo, prospera com planejamento, gestão, rotina, técnica, construção de patrimônio, processos, administração e trabalho consistente. O dinheiro cresce quando existe método, reserva e visão de longo prazo.",
+                    divino: "No Núcleo Divino, a missão é construir algo duradouro. A pessoa evolui quando aceita que disciplina não precisa ser prisão, mas ferramenta de liberdade. Seu destino simbólico pede legado, forma e responsabilidade.",
+                    temporal: "No Portal Temporal, a hora reforça necessidade de estabilidade, ordem e construção paciente. Esse portal pede respeito ao tempo, às etapas e à maturação lenta do poder."
+                }
+            },
+            5: {
+                name: "O Errante",
+                title: "liberdade, desejo e movimento",
+                general: "O Errante representa liberdade, movimento, desejo, mudança e experimentação. É o arquétipo de quem precisa respirar, circular, descobrir, viver experiências e escapar de prisões internas ou externas.",
+                light: "Versatilidade, adaptação, curiosidade, coragem para mudar, sensualidade, comunicação dinâmica e abertura para oportunidades.",
+                shadow: "Instabilidade, vícios, fuga, impulsividade, dispersão, dificuldade de compromisso e tendência a abandonar projetos.",
+                phrase: "Eu preciso ser livre, mas minha liberdade precisa de direção.",
+                advice: "Liberdade sem direção vira fuga. Escolha uma aventura que também construa futuro.",
+                cores: {
+                    solar: "No Núcleo Solar, o Errante quer ser visto como livre, interessante, diferente e cheio de possibilidades. A imagem pessoal se liga a movimento e independência. A ambição não aceita gaiolas, mas precisa aprender a escolher rota.",
+                    lunar: "No Núcleo Lunar, emoções podem oscilar. A pessoa ama intensidade, mas teme aprisionamento. Pode desejar vínculo e liberdade ao mesmo tempo. Sua segurança afetiva nasce quando há espaço sem abandono.",
+                    marcial: "No Núcleo Marcial, age rápido, improvisa e muda de estratégia. Em conflito, pode fugir, provocar ou trocar de ambiente. O desafio é permanecer quando necessário. Sua defesa é movimento, mas nem toda permanência é prisão.",
+                    mercurial: "No Núcleo Mercurial, comunica-se com vivacidade, humor, provocação e adaptação. Pode vender bem, conversar com públicos diferentes e captar tendências. Precisa evitar prometer no entusiasmo aquilo que não pretende sustentar.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada à sensação de prisão. A pessoa pode sabotar relações, empregos ou projetos quando sente perda de liberdade. A sombra pergunta: você quer sair porque acabou ou porque ficou íntimo demais?",
+                    aureo: "No Núcleo Áureo, prospera com vendas, marketing, internet, viagens, comunicação, redes sociais, comércio, lançamentos e atividades dinâmicas. Precisa evitar desorganização financeira e impulsos que drenam recursos.",
+                    divino: "No Núcleo Divino, a missão é conquistar liberdade com maturidade. A pessoa evolui quando aprende que liberdade verdadeira exige disciplina mínima. Seu caminho pede movimento com consciência.",
+                    temporal: "No Portal Temporal, a hora reforça movimento, curiosidade, desejo e mudanças de rota. Esse portal abre portas, mas pede seleção: nem todo convite é destino."
+                }
+            },
+            6: {
+                name: "O Guardião",
+                title: "cuidado, proteção e harmonia afetiva",
+                general: "O Guardião representa cuidado, responsabilidade, proteção, beleza e dever afetivo. É o arquétipo daquele que preserva, acolhe, organiza e sustenta pessoas ou valores.",
+                light: "Lealdade, proteção, responsabilidade, afeto, senso de família, cuidado, beleza, compromisso e harmonia.",
+                shadow: "Controle afetivo, culpa, cobrança emocional, sacrifício excessivo, apego, ciúme e tendência a carregar o destino dos outros.",
+                phrase: "Eu protejo, mas não posso aprisionar.",
+                advice: "Cuide, mas não se abandone. Amar não é carregar o destino de todos.",
+                cores: {
+                    solar: "No Núcleo Solar, o Guardião quer ser visto como confiável, amoroso, responsável e necessário. A imagem pessoal pode se basear em cuidado e estabilidade. A ambição aparece no desejo de ser referência, abrigo e presença segura.",
+                    lunar: "No Núcleo Lunar, a pessoa sente forte necessidade de pertencimento, carinho e compromisso. Sofre com frieza, abandono ou ingratidão. O coração busca vínculo, mas precisa aprender que amor não se mede por sacrifício.",
+                    marcial: "No Núcleo Marcial, defende quem ama com intensidade. Em conflito, pode cobrar, proteger demais ou agir como se soubesse o que é melhor para o outro. Sua defesa nasce do cuidado, mas pode virar controle.",
+                    mercurial: "No Núcleo Mercurial, comunica-se com tom afetivo, conselheiro ou conciliador. Pode convencer pelo cuidado, mas precisa evitar culpa emocional. Sua palavra cura quando orienta sem aprisionar.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada a abandono, ingratidão e medo de não ser necessário. Pode tentar controlar para não perder. A autossabotagem surge quando a pessoa acredita que precisa ser indispensável para ser amada.",
+                    aureo: "No Núcleo Áureo, prospera com serviços de cuidado, estética, família, casa, saúde, educação, beleza, alimentação, consultoria e acolhimento. O dinheiro cresce quando o cuidado recebe preço justo e limite claro.",
+                    divino: "No Núcleo Divino, a missão é amar com maturidade, criar harmonia e proteger sem dominar. Evolui ao transformar cuidado em sabedoria. Sua missão pede beleza, responsabilidade e vínculo consciente.",
+                    temporal: "No Portal Temporal, a hora reforça afeto, responsabilidade, proteção e necessidade de vínculos seguros. Esse portal pede que a pessoa preserve o que ama sem perder a própria individualidade."
+                }
+            },
+            7: {
+                name: "O Oculto",
+                title: "mistério, estudo e profundidade espiritual",
+                general: "O Oculto representa introspecção, mistério, estudo, espiritualidade, investigação e profundidade mental. É o arquétipo de quem observa antes de agir e busca verdades escondidas.",
+                light: "Intuição, sabedoria, estudo, análise, percepção, espiritualidade, profundidade e capacidade de enxergar além da superfície.",
+                shadow: "Isolamento, desconfiança, frieza, paranoia, superioridade intelectual, fuga para o mundo mental e dificuldade de se abrir.",
+                phrase: "Eu vejo o que está escondido, mas preciso voltar ao mundo.",
+                advice: "Seu silêncio revela muito, mas também pode afastar quem realmente quer se aproximar.",
+                cores: {
+                    solar: "No Núcleo Solar, o Oculto quer ser visto como profundo, inteligente, misterioso e diferente. A imagem pessoal pode ser reservada, enigmática ou intelectual. A ambição está ligada a saber mais, ver além e não ser facilmente decifrado.",
+                    lunar: "No Núcleo Lunar, a emoção é profunda, mas protegida. A pessoa sente muito, pensa demais e mostra pouco. Pode precisar de silêncio para processar o que sente. A segurança afetiva nasce quando há confiança e respeito pelo espaço interno.",
+                    marcial: "No Núcleo Marcial, age de forma estratégica e silenciosa. Em conflito, observa, analisa e pode se afastar. O risco é usar silêncio como punição. Sua defesa é a distância, mas a cura pede presença consciente.",
+                    mercurial: "No Núcleo Mercurial, comunica-se com profundidade, análise e percepção. Pode ser excelente em estudo, escrita, espiritualidade, psicologia e investigação. Precisa evitar transformar conhecimento em superioridade ou barreira.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada à traição, invasão e falta de confiança. Pode se isolar, testar pessoas ou desconfiar demais. A autossabotagem aparece quando a pessoa confunde proteção com exílio.",
+                    aureo: "No Núcleo Áureo, prospera com conhecimento, pesquisa, tecnologia, espiritualidade, consultoria, escrita, ensino, análise, ocultismo e áreas de profundidade. O dinheiro cresce quando o saber sai do esconderijo e encontra forma útil.",
+                    divino: "No Núcleo Divino, a missão é buscar sabedoria, mas compartilhá-la com o mundo. A pessoa evolui quando não usa o conhecimento como prisão ou superioridade. Seu caminho pede revelar sem profanar.",
+                    temporal: "No Portal Temporal, a hora reforça mistério, introspecção, espiritualidade e busca por sentido oculto. Esse portal pede estudo, silêncio e também coragem de voltar à vida prática."
+                }
+            },
+            8: {
+                name: "O Dominador",
+                title: "poder, dinheiro e autoridade estratégica",
+                general: "O Dominador representa poder, dinheiro, comando, estratégia e autoridade. É o arquétipo de quem deseja crescer, vencer, influenciar e assumir controle do próprio destino.",
+                light: "Ambição, liderança, magnetismo, prosperidade, estratégia, força, autoridade, visão material e capacidade de comando.",
+                shadow: "Manipulação, frieza, orgulho, obsessão por controle, autoritarismo, materialismo e medo de parecer fraco.",
+                phrase: "Eu não aceito me sentir pequeno.",
+                advice: "Domine primeiro a si mesmo. Poder sem autocontrole vira prisão.",
+                cores: {
+                    solar: "No Núcleo Solar, o Dominador quer ser visto como forte, respeitado, poderoso e capaz. A imagem pessoal tende a buscar status, autoridade ou reconhecimento. A ambição é intensa e nasce do desejo de jamais voltar a se sentir pequeno.",
+                    lunar: "No Núcleo Lunar, a pessoa pode ter dificuldade em demonstrar fragilidade. Emoções são filtradas pelo orgulho e pelo medo de perder poder. A segurança afetiva exige respeito, mas precisa abrir espaço para vulnerabilidade real.",
+                    marcial: "No Núcleo Marcial, age com intensidade, estratégia e domínio. Em conflito, pode impor, controlar ou testar forças. O desafio é não transformar tudo em hierarquia. Sua defesa é assumir comando antes que alguém o domine.",
+                    mercurial: "No Núcleo Mercurial, comunica-se de forma persuasiva, firme e estratégica. Pode vender, negociar e comandar, mas precisa evitar manipulação e intimidação. Sua palavra tem peso quando autoridade e ética caminham juntas.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada à humilhação, impotência ou sensação de inferioridade. Pode tentar recuperar poder controlando pessoas ou situações. A autossabotagem surge quando controle vira vício.",
+                    aureo: "No Núcleo Áureo, prospera com negócios, liderança, gestão, vendas de alto valor, finanças, estratégia, autoridade, empreendedorismo e tomada de decisão. O bloqueio aparece quando medo de perder poder impede alianças ou aprendizado.",
+                    divino: "No Núcleo Divino, a missão é aprender a usar poder com consciência. A pessoa evolui quando domina a si mesma antes de tentar dominar o mundo. Seu caminho pede força material com maturidade espiritual.",
+                    temporal: "No Portal Temporal, a hora reforça ambição, força material, desejo de respeito e magnetismo de autoridade. Esse portal pede presença forte, mas também autocontrole para que poder não vire cárcere."
+                }
+            },
+            9: {
+                name: "O Profeta",
+                title: "visão, missão e transcendência",
+                general: "O Profeta representa visão, missão, compaixão, transcendência e encerramento de ciclos. É o arquétipo de quem busca sentido maior e sente que sua vida precisa tocar algo além do ego.",
+                light: "Sabedoria, inspiração, compaixão, idealismo, visão ampla, criatividade espiritual, generosidade e senso de missão.",
+                shadow: "Martírio, fantasia, fuga da realidade, vitimismo, desejo de salvar quem não quer ser salvo e dificuldade de lidar com limites concretos.",
+                phrase: "Eu vejo além, mas preciso agir aqui.",
+                advice: "Sua visão precisa tocar o mundo real. Missão sem ação vira sonho perdido.",
+                cores: {
+                    solar: "No Núcleo Solar, o Profeta quer ser visto como sábio, inspirador, diferente ou elevado. A imagem pode se ligar a missão, sensibilidade e visão ampla. A ambição é menos comum: quer sentido, impacto e memória simbólica.",
+                    lunar: "No Núcleo Lunar, a emoção é intensa e ampla. A pessoa pode absorver dores dos outros, sentir demais e sofrer por problemas que nem sempre são seus. A segurança afetiva nasce quando compaixão encontra limite.",
+                    marcial: "No Núcleo Marcial, age por ideais, causas e sentimentos profundos. Em conflito, pode alternar entre compaixão e explosões emocionais quando se sente injustiçado. Sua defesa é a causa, mas precisa evitar martírio.",
+                    mercurial: "No Núcleo Mercurial, comunica-se com inspiração, simbolismo e visão. Pode escrever, ensinar, aconselhar e emocionar, mas precisa evitar discurso sem ação. Sua palavra é ponte quando toca o real.",
+                    sombrio: "No Núcleo Sombrio, a ferida está ligada ao abandono de si mesmo em nome de algo ou alguém. Pode se sacrificar demais ou viver fantasias de salvação. A autossabotagem aparece quando a missão vira fuga da própria vida.",
+                    aureo: "No Núcleo Áureo, prospera quando conecta dinheiro a propósito: arte, ensino, espiritualidade, causas, comunicação, terapias, escrita, projetos sociais ou inspiração coletiva. O bloqueio é culpa por prosperar ou falta de estrutura.",
+                    divino: "No Núcleo Divino, a missão é transformar experiência em sabedoria e sabedoria em contribuição real. A pessoa evolui quando une visão espiritual com prática. Seu caminho pede compaixão encarnada.",
+                    temporal: "No Portal Temporal, a hora reforça sensibilidade, missão, imaginação e desejo de significado. Esse portal pede que sonhos, sinais e inspirações sejam trazidos para escolhas concretas."
+                }
+            }
+        };
+
+        const form = document.querySelector("#auraxForm");
+        const resultPanel = document.querySelector("#resultado");
+
+        function normalizeName(value) {
+            return value
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toUpperCase()
+                .replace(/[^A-Z]/g, "");
+        }
+
+        function reduceNumber(number) {
+            let total = Math.abs(Number(number) || 0);
+            while (total > 9) {
+                total = String(total).split("").reduce((sum, digit) => sum + Number(digit), 0);
+            }
+            return total || 9;
+        }
+
+        function sumLetters(value, mode = "all") {
+            const clean = normalizeName(value);
+            const vowels = "AEIOU";
+
+            return clean.split("").reduce((sum, letter) => {
+                const isVowel = vowels.includes(letter);
+                if (mode === "vowels" && !isVowel) return sum;
+                if (mode === "consonants" && isVowel) return sum;
+                return sum + (pitagorica[letter] || 0);
+            }, 0);
+        }
+
+        function splitDate(dateValue) {
+            const [year, month, day] = dateValue.split("-").map(Number);
+            return { day, month, year };
+        }
+
+        function splitTime(timeValue) {
+            const [hour, minute] = timeValue.split(":").map(Number);
+            return { hour, minute };
+        }
+
+        function archetypeLabel(number) {
+            return `${number} — ${archetypes[number].name}`;
+        }
+
+        function calculateAurax(data) {
+            const { day, month, year } = splitDate(data.birthDate);
+            const { hour, minute } = splitTime(data.birthTime);
+            const cleanName = normalizeName(data.fullName);
+
+            const solar = reduceNumber(sumLetters(data.fullName));
+            const lunar = reduceNumber(day + month + year);
+            const marcial = reduceNumber(sumLetters(data.fullName, "consonants"));
+            const mercurial = reduceNumber(sumLetters(data.fullName, "vowels"));
+            const sombrio = reduceNumber(solar + lunar + marcial);
+            const aureo = reduceNumber(day + cleanName.length);
+            const divino = reduceNumber(solar + lunar + mercurial + sombrio);
+            const temporal = reduceNumber(hour + minute);
+
+            return {
+                solar,
+                lunar,
+                marcial,
+                mercurial,
+                sombrio,
+                aureo,
+                divino,
+                temporal,
+                formula: `${archetypes[solar].name.replace("O ", "")} ${archetypes[sombrio].name.replace("O ", "")} ${archetypes[divino].name.replace("O ", "")}`
+            };
+        }
+
+        function core(number) {
+            return auraxLibrary[number];
+        }
+
+        function buildCombinedSynthesis(calc, question) {
+            const solar = core(calc.solar);
+            const lunar = core(calc.lunar);
+            const marcial = core(calc.marcial);
+            const mercurial = core(calc.mercurial);
+            const sombrio = core(calc.sombrio);
+            const aureo = core(calc.aureo);
+            const divino = core(calc.divino);
+            const temporal = core(calc.temporal);
+
+            return {
+                opening: [
+                    `Por fora, esta configuração manifesta a energia de ${solar.name}, buscando ser percebida através de ${solar.title}. Isso mostra como a pessoa tenta ocupar espaço no mundo: pela imagem que sustenta, pela ambição que a move e pelo tipo de reconhecimento que deseja receber.`,
+                    `Por dentro, a emoção é marcada por ${lunar.name}, revelando necessidades profundas ligadas a ${lunar.title}. Esse núcleo mostra onde existe carência, busca de segurança afetiva e o tipo de acolhimento que a alma pede quando ninguém está olhando.`,
+                    `Quando pressionada, a pessoa reage através de ${marcial.name}, usando como defesa a força de ${marcial.title}. Ao mesmo tempo, sua mente e sua palavra carregam ${mercurial.name}, influenciando a forma de convencer, seduzir, argumentar, persuadir ou se proteger pela linguagem.`,
+                    `A sombra profunda se expressa por ${sombrio.name}, indicando padrões inconscientes de autossabotagem, desejo reprimido e defesa emocional. No dinheiro e no valor pessoal, ${aureo.name} mostra como a prosperidade pode fluir ou ser bloqueada. Por fim, ${divino.name} aponta a missão simbólica, enquanto ${temporal.name} traz a vibração complementar da hora de nascimento, colorindo o mapa com ritmo, impulso e atmosfera própria.`
+                ],
+                strengths: [
+                    `A luz do Solar ${solar.name} oferece ${solar.light.toLowerCase()} Esse é o primeiro ponto de força: existe uma imagem de mundo tentando se afirmar e ocupar lugar.`,
+                    `A força do Marcial ${marcial.name} mostra como a ação pode ser usada para atravessar obstáculos: ${marcial.cores.marcial}`,
+                    `O Mercurial ${mercurial.name} amplia o poder de pensamento e comunicação: ${mercurial.cores.mercurial}`,
+                    `O Divino ${divino.name} dá direção superior ao mapa: ${divino.cores.divino}`,
+                    `O Portal Temporal ${temporal.name} reforça o tom complementar do destino cotidiano: ${temporal.cores.temporal}`
+                ],
+                shadows: [
+                    `A sombra principal se concentra em ${sombrio.name}: ${sombrio.cores.sombrio}`,
+                    `A carência lunar revela onde a pessoa pode buscar segurança de modo inconsciente: ${lunar.cores.lunar}`,
+                    `O bloqueio áureo mostra como valor pessoal, dinheiro e prosperidade podem ser afetados: ${aureo.cores.aureo}`,
+                    `A distorção solar aparece quando a imagem desejada se torna máscara: ${solar.shadow}`,
+                    `O ponto de atenção marcial é a forma como a pessoa reage quando se sente ameaçada: ${marcial.shadow}`
+                ],
+                conflict: `O conflito interno principal nasce da tensão entre o Solar ${solar.name}, que deseja reconhecimento através de ${solar.title}, e o Sombrio ${sombrio.name}, que reage a partir de feridas ocultas ligadas a ${sombrio.title}. O Lunar ${lunar.name} mostra a carência que alimenta esse conflito, enquanto o Marcial ${marcial.name} revela a defesa usada quando a dor é ativada. A saída aparece no Divino ${divino.name}: transformar o padrão em evolução consciente, assumindo missão sem negar sombra, desejo, medo ou ambição.`,
+                finalAdvice: [
+                    `${divino.advice}`,
+                    `O dinheiro e o valor pessoal precisam ser tratados pelo caminho do Áureo ${aureo.name}: ${aureo.cores.aureo}`,
+                    `A palavra deve amadurecer pelo Mercurial ${mercurial.name}, porque a forma de comunicar decide se o poder será ponte ou arma.`,
+                    `Quando a sombra de ${sombrio.name} surgir, o conselho não é reprimi-la, mas reconhecê-la como sinal de uma necessidade antiga tentando governar uma escolha atual.`,
+                    `O AURAX final aconselha alinhar imagem, emoção, ação, palavra, sombra, prosperidade, missão e tempo. Quando esses oito núcleos trabalham juntos, a vontade deixa de ser impulso fragmentado e se torna direção oculta consciente.`
+                ],
+                answer: question
+                    ? `Diante da pergunta central "${question}", o AURAX indica que a resposta não está em uma solução superficial. O Solar ${solar.name} mostra o que você quer afirmar; o Lunar ${lunar.name} mostra o que precisa de segurança; o Sombrio ${sombrio.name} mostra o que deve ser encarado sem máscara; e o Divino ${divino.name} mostra a direção de evolução. A resposta simbólica é: não decida apenas pela ansiedade, pelo orgulho ou pela carência. Observe onde a pergunta toca medo, desejo e missão ao mesmo tempo. O caminho mais favorável é aquele que preserva sua verdade, não alimenta sua autossabotagem e abre espaço para uma forma mais madura de poder pessoal.`
+                    : ""
+            };
+        }
+
+        function archetypeDetail(title, number, coreKey) {
+            const item = core(number);
+            return `
+                <article class="node-reading">
+                    <h3>${title}: ${number} — ${item.name}</h3>
+                    <p class="phrase">"${item.phrase}"</p>
+                    <p>${item.cores[coreKey]}</p>
+                    <div class="mini-grid">
+                        <div><b>Descrição geral:</b> ${item.general}</div>
+                        <div><b>Luz:</b> ${item.light}</div>
+                        <div><b>Sombra:</b> ${item.shadow}</div>
+                        <div><b>Conselho:</b> ${item.advice}</div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderResult(data, calc) {
+            const displayName = data.socialName || data.fullName;
+            const interpretation = buildCombinedSynthesis(calc, data.centralQuestion);
+            const whatsappText = encodeURIComponent("Olá, quero meu mapa completo.");
+
+            resultPanel.innerHTML = `
+                <article id="auraxReading">
+                    <div class="identity">
+                        <span>Leitura AURAX de</span>
+                        <strong>${displayName}</strong>
+                        <p class="formula">Fórmula AURAX: ${calc.formula}</p>
+                    </div>
+
+                    <div class="grid">
+                        <div class="card"><span>Núcleo Solar</span><strong>${archetypeLabel(calc.solar)}</strong></div>
+                        <div class="card"><span>Núcleo Lunar</span><strong>${archetypeLabel(calc.lunar)}</strong></div>
+                        <div class="card"><span>Núcleo Marcial</span><strong>${archetypeLabel(calc.marcial)}</strong></div>
+                        <div class="card"><span>Núcleo Mercurial</span><strong>${archetypeLabel(calc.mercurial)}</strong></div>
+                        <div class="card"><span>Núcleo Sombrio</span><strong>${archetypeLabel(calc.sombrio)}</strong></div>
+                        <div class="card"><span>Núcleo Áureo</span><strong>${archetypeLabel(calc.aureo)}</strong></div>
+                        <div class="card"><span>Núcleo Divino</span><strong>${archetypeLabel(calc.divino)}</strong></div>
+                        <div class="card"><span>Portal Temporal</span><strong>${archetypeLabel(calc.temporal)}</strong></div>
+                    </div>
+
+                    <section class="reading-section">
+                        <h2>Leitura Personalizada</h2>
+                        <div class="premium-block">
+                            ${interpretation.opening.map(item => `<p>${item}</p>`).join("")}
+                        </div>
+                    </section>
+
+                    <section class="reading-section">
+                        <h2>Pontos Fortes Combinados</h2>
+                        <div class="premium-block">
+                            ${interpretation.strengths.map(item => `<p>${item}</p>`).join("")}
+                        </div>
+                    </section>
+
+                    <section class="reading-section">
+                        <h2>Pontos de Sombra Combinados</h2>
+                        <div class="premium-block">
+                            ${interpretation.shadows.map(item => `<p>${item}</p>`).join("")}
+                        </div>
+                    </section>
+
+                    <section class="reading-section">
+                        <h2>Conflito Interno Principal</h2>
+                        <div class="premium-block">
+                            <p>${interpretation.conflict}</p>
+                        </div>
+                    </section>
+
+                    <section class="reading-section">
+                        <h2>Conselho AURAX</h2>
+                        <div class="premium-block">
+                            ${interpretation.finalAdvice.map(item => `<p>${item}</p>`).join("")}
+                        </div>
+                    </section>
+
+                    ${interpretation.answer ? `
+                        <section class="reading-section">
+                            <h2>Resposta Simbólica</h2>
+                            <p>${interpretation.answer}</p>
+                        </section>
+                    ` : ""}
+
+                    <section class="reading-section archetype-list">
+                        <h2>Interpretações dos Núcleos</h2>
+                        ${archetypeDetail("Núcleo Solar — ego, imagem e ambição", calc.solar, "solar")}
+                        ${archetypeDetail("Núcleo Lunar — emoção, carência e segurança afetiva", calc.lunar, "lunar")}
+                        ${archetypeDetail("Núcleo Marcial — ação, conflito e defesa", calc.marcial, "marcial")}
+                        ${archetypeDetail("Núcleo Mercurial — comunicação, pensamento e persuasão", calc.mercurial, "mercurial")}
+                        ${archetypeDetail("Núcleo Sombrio — trauma, autossabotagem e desejo reprimido", calc.sombrio, "sombrio")}
+                        ${archetypeDetail("Núcleo Áureo — dinheiro, valor pessoal e prosperidade", calc.aureo, "aureo")}
+                        ${archetypeDetail("Núcleo Divino — missão, sentido e evolução", calc.divino, "divino")}
+                        ${archetypeDetail("Portal Temporal — vibração complementar da hora de nascimento", calc.temporal, "temporal")}
+                    </section>
+
+                    <section class="premium">
+                        <h2>Leitura Premium</h2>
+                        <p>Esta foi uma leitura inicial do seu Código AURAX. Para receber uma análise completa com sombra profunda, compatibilidade amorosa, dinheiro, missão, bloqueios e plano de evolução, solicite sua leitura premium.</p>
+                        <a class="button-link" href="https://api.whatsapp.com/send?text=${whatsappText}" target="_blank" rel="noopener">Quero minha leitura completa</a>
+                    </section>
+                </article>
+
+                <div class="button-row">
+                    <a class="button-link" href="index.html#ferramentas">Voltar</a>
+                    <button type="button" id="copyResult">Copiar resultado</button>
+                    <button type="button" id="printResult">Imprimir / salvar em PDF</button>
+                </div>
+                <p class="copy-status" id="copyStatus"></p>
+            `;
+
+            document.querySelector("#copyResult").addEventListener("click", copyResult);
+            document.querySelector("#printResult").addEventListener("click", () => window.print());
+        }
+
+        async function copyResult() {
+            const reading = document.querySelector("#auraxReading");
+            const status = document.querySelector("#copyStatus");
+            const text = reading.innerText.trim();
+
+            try {
+                await navigator.clipboard.writeText(text);
+                status.textContent = "Resultado copiado.";
+            } catch (error) {
+                status.textContent = "Não foi possível copiar automaticamente. Selecione o texto e copie manualmente.";
+            }
+        }
+
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {
+                fullName: String(formData.get("fullName") || "").trim(),
+                birthDate: String(formData.get("birthDate") || ""),
+                birthTime: String(formData.get("birthTime") || ""),
+                socialName: String(formData.get("socialName") || "").trim(),
+                centralQuestion: String(formData.get("centralQuestion") || "").trim()
+            };
+
+            if (!data.fullName || !data.birthDate || !data.birthTime) {
+                return;
+            }
+
+            const calc = calculateAurax(data);
+            renderResult(data, calc);
+            resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        });    </script>
+</body>
+</html>
