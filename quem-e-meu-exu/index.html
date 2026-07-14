@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem é Meu Exu? - Templo Aurora Negra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Quem é Meu Exu?</h1>
+            <p class="subtitle">Um teste simbólico e psicológico inspirado em arquétipos de Exu e Pombagira, feito para revelar padrões de ação, sombra, desejo, limite e transformação.</p>
+        </div>
+    </header>
+
+    <nav class="top-actions" aria-label="Navegação">
+        <a class="button-link" href="../index.html#ferramentas">Voltar ao Templo</a>
+        <button type="button" id="resumeButton" class="hidden">Retomar teste</button>
+        <button type="button" id="eraseButton">Apagar meus dados</button>
+    </nav>
+
+    <main class="shell">
+        <section class="panel dev-panel hidden" id="devPanel" aria-label="Modo de teste">
+            <h2>Modo de teste</h2>
+            <p>Disponível por <code>?testMode=true</code>. Nenhuma informação é enviada para servidores.</p>
+            <div class="button-row">
+                <button type="button" data-profile="random">Respostas aleatórias</button>
+                <button type="button" data-profile="exu-lucifer">Perfil Exu Lúcifer</button>
+                <button type="button" data-profile="tranca-ruas">Perfil Tranca-Ruas</button>
+                <button type="button" data-profile="exu-do-lodo">Perfil Exu do Lodo</button>
+                <button type="button" data-profile="exu-caveira">Perfil Exu Caveira</button>
+                <button type="button" data-profile="exu-marabo">Perfil Exu Marab</button>
+                <button type="button" data-profile="maria-padilha">Perfil Maria Padilha</button>
+                <button type="button" data-profile="maria-mulambo">Perfil Maria Mulambo</button>
+                <button type="button" data-profile="rosa-caveira">Perfil Rosa Caveira</button>
+                <button type="button" data-profile="balanced">Perfil equilibrado</button>
+                <button type="button" data-profile="tiriri">Perfil Exu Tiriri</button>
+                <button type="button" data-profile="exu-das-almas">Perfil Exu das Almas</button>
+                <button type="button" data-profile="sete-porteiras">Perfil Sete Porteiras</button>
+                <button type="button" data-profile="capa-preta">Perfil Capa Preta</button>
+                <button type="button" data-profile="maria-navalha">Perfil Maria Navalha</button>
+                <button type="button" data-profile="sete-saias">Perfil Sete Saias</button>
+                <button type="button" data-profile="rosa-vermelha">Perfil Rosa Vermelha</button>
+                <button type="button" data-profile="pombagira-menina">Perfil Pombagira Menina</button>
+                <button type="button" id="jumpResult">Ir ao resultado</button>
+                <button type="button" id="exportJson">Exportar JSON</button>
+            </div>
+            <div id="diagnosticPanel" class="diagnostic-grid hidden"></div>
+            <pre id="debugScores" class="hidden"></pre>
+        </section>
+
+        <section class="panel" id="landing">
+            <h2>Experiência Arquetípica</h2>
+            <p>Esta página não tenta revelar uma entidade espiritual literal. Ela organiza respostas em dimensões psicológicas e simbólicas para sugerir afinidades arquetípicas, sombras ativas e uma função prática de desenvolvimento.</p>
+            <p class="notice">Esta experiência oferece uma interpretação simbólica e psicológica inspirada em arquétipos de Exu e Pombagira. Ela não confirma entidades espirituais, mediunidade, filiação religiosa ou avaliação clínica.</p>
+            <div class="button-row">
+                <button class="primary" type="button" id="startButton">Iniciar teste</button>
+            </div>
+        </section>
+
+        <section class="panel hidden" id="initialFormPanel">
+            <h2>Dados iniciais</h2>
+            <form id="initialForm">
+                <div class="field">
+                    <label for="firstName">Primeiro nome</label>
+                    <input id="firstName" name="firstName" autocomplete="given-name" required>
+                </div>
+                <div class="field">
+                    <label for="birthDate">Data de nascimento</label>
+                    <input id="birthDate" name="birthDate" type="date" required>
+                </div>
+                <div class="field">
+                    <label for="area">Área principal que deseja trabalhar</label>
+                    <select id="area" name="area" required></select>
+                </div>
+                <label class="checkbox">
+                    <input id="accepted" name="accepted" type="checkbox" required>
+                    <span>Li e aceito o aviso: esta experiência é simbólica e psicológica, não confirma entidades espirituais, mediunidade, filiação religiosa ou avaliação clínica.</span>
+                </label>
+                <p class="error" id="formError" role="alert"></p>
+                <div class="button-row">
+                    <button type="button" id="backToLanding">Voltar</button>
+                    <button class="primary" type="submit">Continuar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel question-card hidden" id="questionPanel">
+            <div class="progress" aria-label="Progresso">
+                <span id="progressText"></span>
+                <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+            </div>
+            <h2 id="questionTitle"></h2>
+            <p id="questionHelp"></p>
+            <div class="answers" id="answers"></div>
+            <p class="error" id="questionError" role="alert"></p>
+            <div class="button-row">
+                <button type="button" id="previousQuestion">Voltar</button>
+                <button class="primary" type="button" id="nextQuestion">Continuar</button>
+            </div>
+        </section>
+
+        <section class="panel hidden" id="processingPanel">
+            <h2>Processando a encruzilhada simbólica</h2>
+            <p>Suas respostas estão sendo organizadas em dimensões psicológicas. O resultado será determinístico: as mesmas respostas geram o mesmo mapa.</p>
+        </section>
+
+        <section class="panel hidden" id="resultPanel" aria-live="polite"></section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Templo Aurora Negra. Ferramenta simbólica, sem avaliação clínica e sem confirmação espiritual.</p>
+    </footer>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
+
+
+

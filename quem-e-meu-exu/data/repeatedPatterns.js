@@ -1,0 +1,7 @@
+function rp(id, text, options) { return { id, type: "repeated", text, options }; }
+function opt(text, weights) { return { text, weights }; }
+export const repeatedPatterns = [
+    rp("r1", "Qual tipo de problema mais se repete?", [opt("Começar com força e perder constância.", { noveltySeeking: 0.8, strategicPatience: 0.3, consistency: 0.2 }), opt("Desconfiar antes de verificar.", { vigilance: 0.8, rumination: 0.6 }), opt("Sentir que dá mais do que recebe.", { relationalReciprocity: 0.8, rejectionSensitivity: 0.5 }), opt("Precisar provar valor pela imagem ou entrega.", { statusDrive: 0.8, aestheticIdentity: 0.5 })]),
+    rp("r2", "Em que momento costuma abandonar projetos?", [opt("Quando a novidade acaba.", { noveltySeeking: 0.8, strategicPatience: 0.2 }), opt("Quando precisa mostrar algo imperfeito.", { vulnerabilityTolerance: 0.2, statusDrive: 0.6 }), opt("Quando não vê sentido suficiente.", { meaningSeeking: 0.9, agency: 0.2 }), opt("Quando perde controle das variáveis.", { controlNeed: 0.8, emotionalRegulation: 0.3 })]),
+    rp("r3", "Depois de conflitos, você tende a:", [opt("Repassar mentalmente a conversa.", { rumination: 1, rejectionSensitivity: 0.5 }), opt("Ficar mais atento aos riscos.", { vigilance: 0.8, controlNeed: 0.5 }), opt("Buscar reparação e reciprocidade.", { relationalReciprocity: 0.9, vulnerabilityTolerance: 0.5 }), opt("Encerrar e seguir com outra rota.", { closure: 0.8, noveltySeeking: 0.5 })])
+];
